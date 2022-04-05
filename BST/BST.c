@@ -1,8 +1,15 @@
 #include "BST.h"
 
-Celula bstCriaCelula(int info) {
+Celula bstCriaCelula(int chave) {
 
 	Celula novaCelula = (Celula)malloc(sizeof(Celula));
+
+	novaCelula->pai = NULL;
+
+	novaCelula->chave = chave;
+
+	novaCelula->fEsq = NULL;
+	novaCelula->fDir = NULL;
 
 	return novaCelula;
 }
@@ -64,6 +71,11 @@ void bstRemover(Arvore* arvore, Celula celula) {
 
 Celula bstMinimo(Arvore* arvore) {
 
+	if (arvore->raiz == NULL)
+	{
+		return NULL;
+	}
+
 	if (arvore->raiz->fEsq == NULL)
 	{
 		return arvore->raiz;
@@ -81,6 +93,11 @@ Celula bstMinimo(Arvore* arvore) {
 
 Celula bstMaximo(Arvore* arvore) {
 	
+	if (arvore->raiz == NULL)
+	{
+		return NULL;
+	}
+
 	if (arvore->raiz->fDir == NULL)
 	{
 		return arvore->raiz;

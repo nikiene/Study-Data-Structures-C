@@ -6,7 +6,7 @@
 typedef struct node
 {
 	struct node* pai;
-	int info;
+	int chave;
 	struct node* fEsq;
 	struct node* fDir;
 } Node;
@@ -18,7 +18,7 @@ typedef struct arvore
 	Celula raiz;
 } Arvore;
 
-Celula bstCriaCelula(int info);
+Celula bstCriaCelula(int chave);
 
 Arvore* bstCriaArvore();
 
