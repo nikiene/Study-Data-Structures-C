@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct node
 {
@@ -13,17 +14,22 @@ typedef struct node
 
 typedef Node* Celula;
 
-typedef struct arvore
+typedef struct raiz
 {
 	Celula raiz;
-} Arvore;
+	int altura; 
+} Raiz;
 
-Celula bstCriaCelula(int chave);
+Raiz* bstCriaRaiz();
 
-Arvore* bstCriaArvore();
+Celula bstCriaCelula();
 
-void bstRemover(Arvore* arvore, Celula celula);
+int bstAlturaMaxima(int altura);
 
-Celula bstMinimo(Arvore* arvore);
+int bstMaximoFolhas(int altura);
 
-Celula bstMaximo(Arvore* arvore);
+Celula bstBusca(Celula raiz, int alvo);
+
+Celula bstMinimo(Celula raiz);
+
+Celula bstMaximo(Celula raiz);

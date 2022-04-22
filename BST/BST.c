@@ -1,114 +1,65 @@
 #include "BST.h"
 
-Celula bstCriaCelula(int chave) {
+Raiz* bstCriaRaiz()
+{
+	Raiz* novaRaiz = (Raiz*)malloc(sizeof(Raiz));
 
-	Celula novaCelula = (Celula)malloc(sizeof(Celula));
+	novaRaiz->raiz = NULL;
 
-	novaCelula->pai = NULL;
-
-	novaCelula->chave = chave;
-
-	novaCelula->fEsq = NULL;
-	novaCelula->fDir = NULL;
-
-	return novaCelula;
+	return novaRaiz;
 }
 
-Arvore* bstCriaArvore() {
-
-	Arvore* arvore = (Arvore*)malloc(sizeof(Arvore));
-
-	arvore->raiz = NULL;
-
-	return arvore;
-}
-
-void transplante(Arvore arvore*, Celula celulaA, Celula celulaB) {
-
-	if (celulaA->pai == NULL)
-	{
-		arvore->raiz = celulaB;
-	}
-	else if (celulaA == celulaA->pai->fEsq)
-	{
-		celulaA->pai->fEsq = celulaB;
-	}
-	else 
-	{
-		celulaA->pai->fDir = celulaB;
-	}
-
-	if (celulaB != NULL)
-	{
-		celulaB->pai = celulaA->pai;
-	}
-}
-
-void bstRemover(Arvore* arvore, Celula celula) {
-
-	if (celula->fEsq == NULL)
-	{
-		transplante(arvore, celula, celula->fDir);
-	}
-	else if (celula->fDir == NULL)
-	{
-		transplante(arvore, celula, celula->fEsq);
-	}
-	else 
-	{
-		Celula aux = bstMinimo(celula->fDir);
-		if (aux->pai != celula)
-		{
-			transplante(arvore, aux, aux->fDir);
-			aux->fDir = arvore->fDir;
-			aux->dir->pai = aux;
-		}
-		transplante(arvore, celula, aux);
-		aux->fEsq = celula->fEsq;
-		aux->fEsq->pai = aux;
-	}
-}
-
-Celula bstMinimo(Arvore* arvore) {
-
-	if (arvore->raiz == NULL)
-	{
-		return NULL;
-	}
-
-	if (arvore->raiz->fEsq == NULL)
-	{
-		return arvore->raiz;
-	}
-
-	Celula aux = arvore->raiz;
-
-	while(aux != NULL) 
-	{
-		aux = aux->fEsq;
-	}
-
-	return aux; 		
-}
-
-Celula bstMaximo(Arvore* arvore) {
+Celula bstCriaCelula()
+{
 	
-	if (arvore->raiz == NULL)
+}
+
+int bstAlturaMaxima(int altura)
+{
+	return (pow(2, altura) -1);
+}
+
+int bstMaximoFolhas(int altura)
+{
+	return pow(2, altura -1);
+}
+
+Celula bstBusca(Celula raiz, int alvo)
+{
+	if (raiz == NULL || raiz->chave == alvo)
 	{
-		return NULL;
-	}
-
-	if (arvore->raiz->fDir == NULL)
+		return raiz;
+	} 
+	else if (alvo > raiz->chave)
 	{
-		return arvore->raiz;
+		return bstBusca(raiz->fDir, alvo);
 	}
-
-	Celula aux = arvore->raiz;
-
-	while(aux != NULL)
+	else 
 	{
-		aux = aux->fDir;
+		return bstBusca(raiz->fEsq, alvo);
 	}
+}
 
-	return aux;
+Celula bstMinimo(Celula raiz)
+{
+	if (raiz == NULL || raiz->fEsq == NULL)
+	{
+		return raiz;
+	} 
+	else
+	{
+		return bstMinimo(raiz->fEsq);
+	}
+}
+
+Celula bstMaximo(Celula raiz)
+{
+	if (raiz == NULL || raiz->fDir == NULL)
+	{
+		return raiz;
+	}
+	else
+	{
+		return bstMaximo(raiz->fDir);
+	}
 }

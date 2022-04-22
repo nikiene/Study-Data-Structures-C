@@ -4,7 +4,7 @@
 
 int main(int argc, char const *argv[])
 {
-	
+	Raiz* raiz = bstCriaRaiz();
 
 	return 0;
 }
