@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 typedef struct node
 {
@@ -20,9 +21,9 @@ typedef struct raiz
 	int altura; 
 } Raiz;
 
-Raiz* bstCriaRaiz();
+Celula bstCriaCelula(int chave);
 
-Celula bstCriaCelula();
+Raiz* bstCriaRaiz();
 
 int bstAlturaMaxima(int altura);
 
@@ -33,3 +34,7 @@ Celula bstBusca(Celula raiz, int alvo);
 Celula bstMinimo(Celula raiz);
 
 Celula bstMaximo(Celula raiz);
+
+void bstInsert(Celula raiz, int chave);
+
+void bstPrint(Celula raiz);

@@ -1,5 +1,19 @@
 #include "BST.h"
 
+Celula bstCriaCelula(int chave)
+{
+	Celula novaCelula = (Celula)malloc(sizeof(Node));
+
+	novaCelula->chave = chave;
+
+	novaCelula->pai = NULL;
+
+	novaCelula->fEsq = NULL;
+	novaCelula->fDir = NULL;
+
+	return novaCelula;
+}
+
 Raiz* bstCriaRaiz()
 {
 	Raiz* novaRaiz = (Raiz*)malloc(sizeof(Raiz));
@@ -7,11 +21,6 @@ Raiz* bstCriaRaiz()
 	novaRaiz->raiz = NULL;
 
 	return novaRaiz;
-}
-
-Celula bstCriaCelula()
-{
-	
 }
 
 int bstAlturaMaxima(int altura)
@@ -61,5 +70,44 @@ Celula bstMaximo(Celula raiz)
 	else
 	{
 		return bstMaximo(raiz->fDir);
+	}
+}
+
+void bstInsert(Celula raiz, int chave)
+{
+	if (raiz == NULL)
+	{
+		raiz = bstCriaCelula(chave);
+		return;
+	}
+
+	if (novaCelula->chave > raiz->chave)
+	{
+		raiz->fDir = bstInsert(raiz->fDir, chave);
+	}
+	else
+	{
+		raiz->fEsq = bstInsert(raiz->fEsq, chave);
+	}
+}
+
+void bstPrint(Celula raiz, int opc)
+{
+	switch(opc)
+	{
+		//InOrder (Esquerda, Raiz, Direita)
+		case 1:
+			
+			break;
+		//PreOrder (Raiz, Esquerda, Direita)
+		case 2:
+
+			break;
+		//PostOrder (Esquerda, Direita, Raiz)
+		case 3:
+			
+			break;
+		default:
+			break;
 	}
 }
