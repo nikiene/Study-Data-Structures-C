@@ -6,5 +6,15 @@ int main(int argc, char const *argv[])
 {
 	Raiz* raiz = bstCriaRaiz();
 
+	bstInsert(raiz, 50);
+	bstInsert(raiz, 30);
+	bstInsert(raiz, 20);
+	bstInsert(raiz, 40);
+	bstInsert(raiz, 70);
+	bstInsert(raiz, 60);
+	bstInsert(raiz, 80);
+
+	bstPrint(raiz);
+
 	return 0;
 }
