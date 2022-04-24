@@ -15,15 +15,7 @@ typedef struct node
 
 typedef Node* Celula;
 
-typedef struct raiz
-{
-	Celula raiz;
-	int altura; 
-} Raiz;
-
 Celula bstCriaCelula(int chave);
-
-Raiz* bstCriaRaiz();
 
 int bstAlturaMaxima(int altura);
 
@@ -38,3 +30,7 @@ Celula bstMaximo(Celula raiz);
 void bstInsert(Celula raiz, int chave);
 
 void bstPrint(Celula raiz);
+
+void bstPrintIdentado(Celula raiz);
+
+int bstCalculaAltura(Celula raiz);

@@ -142,3 +142,30 @@ void bstPrint(Celula raiz)
 			break;
 	}
 }
+
+void bstPrintIdentado(Celula raiz)
+{
+
+}
+
+int bstCalculaAltura(Celula raiz)
+{
+	if (raiz == NULL)
+	{
+		return -1;
+	}
+	else
+	{
+		int esq = bstCalculaAltura(raiz->fEsq);
+		int dir = bstCalculaAltura(raiz->fDir);
+
+		if (esq > dir)
+		{
+			return esq + 1;
+		}
+		else
+		{
+			return dir + 1;
+		}
+	}
+}
