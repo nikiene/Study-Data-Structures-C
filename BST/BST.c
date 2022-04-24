@@ -94,6 +94,28 @@ void inOrder(Celula raiz)
 	inOrder(raiz->fDir);
 }
 
+void preOrder(Celula raiz)
+{
+	if (raiz == NULL)
+	{
+		return;
+	}
+	printf("%d ", raiz->chave);
+	preOrder(raiz->fEsq);
+	preOrder(raiz->fDir);
+}
+
+void postOrder(Celula raiz)
+{
+	if (raiz == NULL)
+	{
+		return;
+	}
+	postOrder(raiz->fEsq);
+	postOrder(raiz->fDir);
+	printf("%d ", raiz->chave);
+}
+
 void bstPrint(Celula raiz)
 {
 	int opc = 0;
@@ -110,11 +132,11 @@ void bstPrint(Celula raiz)
 			break;
 		//PreOrder (Raiz, Esquerda, Direita)
 		case 2:
-
+			preOrder(raiz);
 			break;
 		//PostOrder (Esquerda, Direita, Raiz)
 		case 3:
-			
+			postOrder(raiz);
 			break;
 		default:
 			break;
