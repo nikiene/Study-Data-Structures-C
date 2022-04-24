@@ -145,7 +145,14 @@ void bstPrint(Celula raiz)
 
 void bstPrintIdentado(Celula raiz)
 {
-
+	if (raiz == NULL)
+	{
+		printf("\n");
+		return;
+	}
+	inOrder(raiz->fEsq);
+	printf("%d ", raiz->chave);
+	inOrder(raiz->fDir);
 }
 
 int bstCalculaAltura(Celula raiz)
