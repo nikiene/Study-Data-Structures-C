@@ -91,13 +91,30 @@ void bstInsert(Celula raiz, int chave)
 	}
 }
 
-void bstPrint(Celula raiz, int opc)
+void inOrder(Celula raiz)
 {
+	if (raiz == NULL)
+	{
+		return;
+	}
+	inOrder(raiz->fEsq);
+	printf("%d, ", raiz->chave);
+	inOrder(raiz->fDir);
+}
+
+void bstPrint(Celula raiz)
+{
+	int opc = 0;
+
+	printf("\nDigite o algoritmo desejado: 1- inOrder | 2- preOrder | 3- postOrder\n");
+	scanf("%d", &opc);
+	getchar();
+
 	switch(opc)
 	{
 		//InOrder (Esquerda, Raiz, Direita)
 		case 1:
-			
+			inOrder(raiz);
 			break;
 		//PreOrder (Raiz, Esquerda, Direita)
 		case 2:
