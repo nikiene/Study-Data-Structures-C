@@ -4,9 +4,9 @@
 
 int main(int argc, char const *argv[])
 {
-	Raiz* raiz = bstCriaRaiz();
+	Celula raiz = NULL;
 
-	bstInsert(raiz, 50);
+	raiz = bstInsert(raiz, 50);
 	bstInsert(raiz, 30);
 	bstInsert(raiz, 20);
 	bstInsert(raiz, 40);

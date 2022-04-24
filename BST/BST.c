@@ -14,15 +14,6 @@ Celula bstCriaCelula(int chave)
 	return novaCelula;
 }
 
-Raiz* bstCriaRaiz()
-{
-	Raiz* novaRaiz = (Raiz*)malloc(sizeof(Raiz));
-
-	novaRaiz->raiz = NULL;
-
-	return novaRaiz;
-}
-
 int bstAlturaMaxima(int altura)
 {
 	return (pow(2, altura) -1);
@@ -73,15 +64,14 @@ Celula bstMaximo(Celula raiz)
 	}
 }
 
-void bstInsert(Celula raiz, int chave)
+Celula bstInsert(Celula raiz, int chave)
 {
 	if (raiz == NULL)
 	{
-		raiz = bstCriaCelula(chave);
-		return;
+		return bstCriaCelula(chave);
 	}
 
-	if (novaCelula->chave > raiz->chave)
+	if (chave > raiz->chave)
 	{
 		raiz->fDir = bstInsert(raiz->fDir, chave);
 	}
@@ -89,6 +79,8 @@ void bstInsert(Celula raiz, int chave)
 	{
 		raiz->fEsq = bstInsert(raiz->fEsq, chave);
 	}
+
+	return  raiz;
 }
 
 void inOrder(Celula raiz)
@@ -98,7 +90,7 @@ void inOrder(Celula raiz)
 		return;
 	}
 	inOrder(raiz->fEsq);
-	printf("%d, ", raiz->chave);
+	printf("%d ", raiz->chave);
 	inOrder(raiz->fDir);
 }
 
