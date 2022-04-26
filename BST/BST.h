@@ -7,8 +7,9 @@
 
 typedef struct node
 {
-	struct node* pai;
+	//struct node* pai;
 	int chave;
+	int altura;
 	struct node* fEsq;
 	struct node* fDir;
 } Node;
@@ -27,10 +28,19 @@ Celula bstMinimo(Celula raiz);
 
 Celula bstMaximo(Celula raiz);
 
-void bstInsert(Celula raiz, int chave);
+Celula bstInsert(Celula raiz, int chave);
 
 void bstPrint(Celula raiz);
 
-void bstPrintIdentado(Celula raiz);
+void bstPrintIdentado(Celula raiz, int nivelAltura);
 
 int bstCalculaAltura(Celula raiz);
+
+int bstCalculaFatorBalanceamanto(Celula raiz);
+
+//retorna o pai da arvore que possui a soma
+Celula bstTemSoma(Celula raiz);
+
+Celula bstCopia(Celula raiz);
+
+Celula avlInsert(Celula raiz, int chave);

@@ -6,7 +6,9 @@ Celula bstCriaCelula(int chave)
 
 	novaCelula->chave = chave;
 
-	novaCelula->pai = NULL;
+	novaCelula->altura = 1;
+
+	//novaCelula->pai = NULL;
 
 	novaCelula->fEsq = NULL;
 	novaCelula->fDir = NULL;
@@ -16,7 +18,7 @@ Celula bstCriaCelula(int chave)
 
 int bstAlturaMaxima(int altura)
 {
-	return (pow(2, altura) -1);
+	return pow(2, altura) -1;
 }
 
 int bstMaximoFolhas(int altura)
@@ -80,6 +82,7 @@ Celula bstInsert(Celula raiz, int chave)
 		raiz->fEsq = bstInsert(raiz->fEsq, chave);
 	}
 
+	raiz->altura = bstCalculaAltura(raiz);
 	return  raiz;
 }
 
@@ -143,23 +146,30 @@ void bstPrint(Celula raiz)
 	}
 }
 
-void bstPrintIdentado(Celula raiz)
+void bstPrintIdentado(Celula raiz, int nivelAltura)
 {
 	if (raiz == NULL)
 	{
-		printf("\n");
-		return;
+		return raiz;
 	}
-	inOrder(raiz->fEsq);
-	printf("%d ", raiz->chave);
-	inOrder(raiz->fDir);
+
+	bstPrintIdentado(raiz->fDir, nivelAltura + 1);
+
+	for (int i = 0; i < nivelAltura; ++i)
+	{
+		printf("\t");
+	}
+
+	printf("%d \n", raiz->chave);
+
+	bstPrintIdentado(raiz->fEsq, nivelAltura + 1);
 }
 
 int bstCalculaAltura(Celula raiz)
 {
 	if (raiz == NULL)
 	{
-		return -1;
+		return 0;
 	}
 	else
 	{
@@ -175,4 +185,34 @@ int bstCalculaAltura(Celula raiz)
 			return dir + 1;
 		}
 	}
+}
+
+int bstCalculaFatorBalanceamanto(Celula raiz)
+{
+	return (bstCalculaAltura(raiz->fEsq) - bstCalculaAltura(raiz->fDir));
+}
+
+Celula bstTemSoma(Celula raiz)
+{
+
+}
+
+Celula bstCopia(Celula raiz)
+{
+
+}
+
+Celula rotR(Celula raiz)
+{
+	
+}
+
+Celula rotL(Celula raiz)
+{
+	
+}
+
+Celula avlInsert(Celula raiz, int chave)
+{
+
 }

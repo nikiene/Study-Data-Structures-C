@@ -16,5 +16,7 @@ int main(int argc, char const *argv[])
 
 	bstPrint(raiz);
 
+	bstPrintIdentado(raiz, 0);
+
 	return 0;
 }
