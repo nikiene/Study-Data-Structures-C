@@ -12,13 +12,16 @@ typedef struct node
 	int altura;
 	struct node* fEsq;
 	struct node* fDir;
+	int fatorBalanceamento;
 } Node;
 
 typedef Node* Celula;
 
 Celula bstCriaCelula(int chave);
 
-int bstAlturaMaxima(int altura);
+void bstDestoy(Celula raiz);
+
+int bstAltura(int altura);
 
 int bstMaximoFolhas(int altura);
 
@@ -34,7 +37,11 @@ void bstPrint(Celula raiz);
 
 void bstPrintIdentado(Celula raiz, int nivelAltura);
 
+int bstCalculaNos(Celula raiz);
+
 int bstCalculaAltura(Celula raiz);
+
+bool isBstAvl(Celula raiz);
 
 int bstCalculaFatorBalanceamanto(Celula raiz);
 

@@ -13,10 +13,24 @@ Celula bstCriaCelula(int chave)
 	novaCelula->fEsq = NULL;
 	novaCelula->fDir = NULL;
 
+	novaCelula->fatorBalanceamento = bstCalculaFatorBalanceamanto(novaCelula);
+
 	return novaCelula;
 }
 
-int bstAlturaMaxima(int altura)
+void bstDestoy(Celula raiz)
+{
+	if (raiz == NULL)
+	{
+		return;
+	}
+	bstDestoy(raiz->fEsq);
+	bstDestoy(raiz->fDir);
+	free(raiz);
+	raiz = NULL
+}
+
+int bstAltura(int altura)
 {
 	return pow(2, altura) -1;
 }
@@ -165,6 +179,11 @@ void bstPrintIdentado(Celula raiz, int nivelAltura)
 	bstPrintIdentado(raiz->fEsq, nivelAltura + 1);
 }
 
+int bstCalculaNos(Celula raiz)
+{
+
+}
+
 int bstCalculaAltura(Celula raiz)
 {
 	if (raiz == NULL)
@@ -183,6 +202,34 @@ int bstCalculaAltura(Celula raiz)
 		else
 		{
 			return dir + 1;
+		}
+	}
+}
+
+bool isBstAvl(Celula raiz)
+{
+	int esq = 0, dir = 0;
+	bool ok = true;
+	if (raiz == NULL)
+	{
+		return false;
+	}
+	ok = isBstAvlo(raiz->fEsq);
+	if (ok)
+	{
+		ok = isBstAvlo(raiz->fDir);
+	}
+	if (ok)
+	{
+		esq = bstCalculaAltura(raiz->fEsq);
+		dir = bstCalculaAltura(raiz->fDir);
+		if (abs(e-d) <= 1)
+		{
+			ok = true;
+		}
+		else
+		{
+			ok = false;
 		}
 	}
 }
@@ -209,10 +256,96 @@ Celula rotR(Celula raiz)
 
 Celula rotL(Celula raiz)
 {
-	
+	Celula u;
+	Celula v;
+	u = raiz->fEsq;
+	if (u->fatorBalanceamento == -1)
+	{
+		raiz->fEsq = u->fDir;
+		u->fDir = raiz;
+		raiz->fatorBalanceamento = 0;
+		raiz = u;
+	}
+	else
+	{
+		v = u->fDir;
+		u->fDir = v->fEsq;
+		v->fEsq = u;
+		raiz->fEsq = v->fDir;
+		v->fDir = raiz;
+		if (v->fatorBalanceamento == -1)
+		{
+			raiz->fatorBalanceamento = 1;
+		}
+		else
+		{
+			raiz->fatorBalanceamento = 0;
+		}
+		if (v->fatorBalanceamento == 1)
+		{
+			u->fatorBalanceamento = -1;
+		}
+		else
+		{
+			u->fatorBalanceamento = 0;
+		}
+		raiz = v;
+	}
+	raiz->fatorBalanceamento = 0;
+	return raiz;
 }
 
-Celula avlInsert(Celula raiz, int chave)
+Celula avlInsert(Celula raiz, int chave, bool* ajustar)
 {
-
+	if (Celula raiz = NULL)
+	{
+		return bstCriaCelula = bstCriaCelula(chave);
+		* ajustar = true;
+	}
+	else
+	{
+		if (chave < raiz->chave)
+		{
+			raiz->fEsq = avlInsert(raiz->fEsq, chave, ajustar);
+			if (* ajustar)
+			{
+				switch (raiz->fatorBalanceamento)
+				{
+					case 1:
+						raiz->fatorBalanceamento = 0;
+						* ajustar = false;
+						break;
+					case 0:
+						raiz->fatorBalanceamento = -1;
+						break;
+					case -1:
+						raiz = rotL(raiz);
+						* ajustar = false;
+						break;
+				}
+			}
+		}
+		else
+		{
+			raiz->fDir = avlInsert(raiz->fDir, chave, ajustar);
+			if (* ajustar)
+			{
+				switch (raiz->fatorBalanceamento)
+				{
+					case -1:
+						raiz->fatorBalanceamento = 0;
+						* ajustar = false;
+						break;
+					case 0:
+						raiz->fatorBalanceamento = 1;
+						break;
+					case 1:
+						raiz = rotR(raiz);
+						* ajustar = false;
+						break;
+				}
+			}
+		}
+	}
+	return raiz;
 }
