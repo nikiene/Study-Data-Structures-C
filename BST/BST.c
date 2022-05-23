@@ -214,10 +214,10 @@ bool isBstAvl(Celula raiz)
 	{
 		return false;
 	}
-	ok = isBstAvlo(raiz->fEsq);
+	ok = isBstAvl(raiz->fEsq);
 	if (ok)
 	{
-		ok = isBstAvlo(raiz->fDir);
+		ok = isBstAvl(raiz->fDir);
 	}
 	if (ok)
 	{
@@ -251,11 +251,6 @@ Celula bstCopia(Celula raiz)
 
 Celula rotR(Celula raiz)
 {
-	
-}
-
-Celula rotL(Celula raiz)
-{
 	Celula u;
 	Celula v;
 	u = raiz->fEsq;
@@ -273,6 +268,47 @@ Celula rotL(Celula raiz)
 		v->fEsq = u;
 		raiz->fEsq = v->fDir;
 		v->fDir = raiz;
+		if (v->fatorBalanceamento == -1)
+		{
+			raiz->fatorBalanceamento = 1;
+		}
+		else
+		{
+			raiz->fatorBalanceamento = 0;
+		}
+		if (v->fatorBalanceamento == 1)
+		{
+			u->fatorBalanceamento = -1;
+		}
+		else
+		{
+			u->fatorBalanceamento = 0;
+		}
+		raiz = v;
+	}
+	raiz->fatorBalanceamento = 0;
+	return raiz;
+}
+
+Celula rotL(Celula raiz)
+{
+	Celula u;
+	Celula v;
+	u = raiz->fDir;
+	if (u->fatorBalanceamento == 1)
+	{
+		raiz->fDir = u->fEsq;
+		u->fEsq = raiz;
+		raiz->fatorBalanceamento = 0;
+		raiz = u;
+	}
+	else
+	{
+		v = u->fEsq;
+		u->fEsq = v->fDir;
+		v->fDir = u;
+		raiz->fDir = v->fEsq;
+		v->fEsq = raiz;
 		if (v->fatorBalanceamento == -1)
 		{
 			raiz->fatorBalanceamento = 1;
