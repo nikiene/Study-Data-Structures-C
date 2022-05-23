@@ -383,5 +383,6 @@ Celula avlInsert(Celula raiz, int chave, bool* ajustar)
 			}
 		}
 	}
+	raiz->altura = bstCalculaAltura(raiz);
 	return raiz;
 }
